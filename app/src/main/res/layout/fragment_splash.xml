@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.movieslistinterview.ui.fragments.splashfragment.SplashViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.splashfragment.SplashFragment">
+
+        <TextView
+            android:id="@+id/tvNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->viewModel.onButtonClick(v)}"
+            android:text="SplashScreen"
+            android:textSize="@dimen/_20sdp" />
+
+        <TextView
+            android:id="@+id/tvNextOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->viewModel.onButtonClick(v)}"
+            android:text="SplashScreen NExt"
+            android:textSize="@dimen/_20sdp" />
+
+
+    </LinearLayout>
+</layout>
