@@ -40,9 +40,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
                 mViewDataBinding.tvNext -> {
                     navigateToActivity()
                 }
-                mViewDataBinding.tvNextOne -> {
-                    navigateToActivity()
-                }
             }
         })
 

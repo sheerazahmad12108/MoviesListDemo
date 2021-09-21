@@ -1,9 +1,11 @@
 package com.example.movieslistinterview.ui.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +15,17 @@ import com.example.movieslistinterview.data.models.MoviesListresponse
 import kotlinx.android.synthetic.main.movies_list_single_item.view.*
 
 class MoviesListAdapter(
-    var dataList: MoviesListresponse,
+    var dataList: MoviesListresponse?,
     val context: Context,
-    val click: onItemClick
+    private val click: onItemClick
 ) : RecyclerView.Adapter<MoviesListAdapter.VHolder>() {
     private lateinit var linearLayoutManager: LinearLayoutManager
+
+    private var image_url: String = "https://image.tmdb.org/t/p/w500"
+
+    fun setModel(model: MoviesListresponse?) {
+        dataList = model
+    }
 
     class VHolder(v: View) : RecyclerView.ViewHolder(v) {
         val tvMovieTitle = v.tvMovieTitle
@@ -33,26 +41,32 @@ class MoviesListAdapter(
     }
 
     override fun onBindViewHolder(holder: VHolder, position: Int) {
-        Glide.with(context).load(dataList.results.get(position).poster_path)
+        Glide.with(context).load(image_url + dataList?.results?.get(position)?.poster_path)
             .into(holder.ivMoviePoster)
-        holder.tvMovieTitle.setText(dataList.results.get(position).title)
-        holder.tvMoviedate.setText(dataList.results.get(position).release_date)
-        if (dataList.results.get(position).adult) {
-            holder.tvMovieAdultStatus.setText("Adult")
+        holder.tvMovieTitle.text = dataList?.results?.get(position)?.title
+        holder.tvMoviedate.text = dataList?.results?.get(position)?.release_date
+        if (dataList?.results?.get(position)?.adult == true) {
+            holder.tvMovieAdultStatus.text = "Adult"
         } else {
-            holder.tvMovieAdultStatus.setText("Non Adult")
+            holder.tvMovieAdultStatus.text = "Non Adult"
         }
 
         holder.itemView.setOnClickListener {
-            click.click(
-                position,
-                dataList.results.get(position).id
-            )
+            dataList?.results?.get(position)?.id?.let { it1 ->
+                click.click(
+                    position,
+                    it1
+                )
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        return dataList.results.size
+        if (dataList == null) {
+            return 0
+        } else {
+            return dataList?.results?.size!!
+        }
     }
 
     interface onItemClick {

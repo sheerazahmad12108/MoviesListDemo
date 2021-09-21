@@ -17,7 +17,7 @@
         android:id="@+id/moviesListFragment"
         android:name="com.example.movieslistinterview.ui.fragments.movieslistfragment.MoviesListFragment"
         android:label="fragment_movies_list"
-        tools:layout="@layout/fragment_movies_list" >
+        tools:layout="@layout/fragment_movies_list">
         <action
             android:id="@+id/action_moviesListFragment_to_moviesDetailFragment"
             app:destination="@id/moviesDetailFragment" />

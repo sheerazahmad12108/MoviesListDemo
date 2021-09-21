@@ -34,19 +34,25 @@ class MoviesListFragment : BaseFragment<FragmentMoviesListBinding, MoviesListVie
         get() = MoviesListViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
-    lateinit var dataList: MoviesListresponse
+    var dataList: MoviesListresponse? = null
     private lateinit var adapter: MoviesListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        callAPI()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        linearLayoutManager = LinearLayoutManager(requireContext())
+        mViewDataBinding.rvMoviesList!!.layoutManager = linearLayoutManager
     }
 
     override fun subscribeToViewLiveData() {
         super.subscribeToViewLiveData()
-        linearLayoutManager = LinearLayoutManager(requireContext())
-        mViewDataBinding.rvMoviesList!!.layoutManager = linearLayoutManager
-        callAPI()
+        adapter = MoviesListAdapter(dataList, requireContext(), this@MoviesListFragment)
+        mViewDataBinding.rvMoviesList.adapter = adapter
     }
 
     private fun callAPI() {
@@ -55,7 +61,6 @@ class MoviesListFragment : BaseFragment<FragmentMoviesListBinding, MoviesListVie
         val map = HashMap<String, String>()
         map["api_key"] = "0d0c8fe3f6ae1544a4d016ee10a67030"
         val call = request.moviesList(map)
-//        Log.wtf("moviesListResponse",)
         call!!.enqueue(object : Callback<MoviesListresponse?> {
             override fun onResponse(
                 call: Call<MoviesListresponse?>,
@@ -65,10 +70,10 @@ class MoviesListFragment : BaseFragment<FragmentMoviesListBinding, MoviesListVie
                 val model: MoviesListresponse? = response.body()
                 if (model != null) {
                     dataList = model
-                    adapter = MoviesListAdapter(dataList, requireContext(), this@MoviesListFragment)
-                    mViewDataBinding.rvMoviesList.adapter = adapter
+                    Log.wtf("DataListSizeNewResponse", "New => " + dataList?.results?.size)
+                    adapter.setModel(dataList)
+                    adapter.notifyDataSetChanged()
                 }
-                adapter.notifyDataSetChanged()
                 Log.wtf("moviesListResponse", "response: " + Gson().toJson(response.body()))
                 Log.wtf(
                     "moviesListResponse",
@@ -88,4 +93,5 @@ class MoviesListFragment : BaseFragment<FragmentMoviesListBinding, MoviesListVie
         args.putString("movieId", movieId.toString())
         findNavController().navigate(R.id.action_moviesListFragment_to_moviesDetailFragment, args)
     }
+
 }

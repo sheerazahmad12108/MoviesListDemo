@@ -25,14 +25,5 @@
             android:text="SplashScreen"
             android:textSize="@dimen/_20sdp" />
 
-        <TextView
-            android:id="@+id/tvNextOne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v)->viewModel.onButtonClick(v)}"
-            android:text="SplashScreen NExt"
-            android:textSize="@dimen/_20sdp" />
-
-
     </LinearLayout>
 </layout>

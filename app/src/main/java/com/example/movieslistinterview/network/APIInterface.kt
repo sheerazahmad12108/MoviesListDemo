@@ -14,7 +14,7 @@ interface APIInterface {
 
     @GET("{movie-id}?")
     fun moviesListDetail(
-        @Path("movie-id") movieId: String,
+        @Path("movie-id") movieId: String?,
         @QueryMap params: HashMap<String, String>
-    ): Call<MovieDetailResponse?>?
+    ): Call<MovieDetailResponse>
 }
