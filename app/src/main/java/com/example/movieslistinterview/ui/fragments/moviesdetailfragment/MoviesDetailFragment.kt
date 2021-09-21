@@ -17,9 +17,6 @@ import com.example.movieslistinterview.data.models.MoviesListresponse
 import com.example.movieslistinterview.databinding.FragmentMoviesDetailBinding
 import com.example.movieslistinterview.network.APIInstance
 import com.example.movieslistinterview.network.APIInterface
-import com.example.movieslistinterview.ui.adapters.MoviesListAdapter
-import com.example.movieslistinterview.ui.fragments.movieslistfragment.MoviesListViewModel
-import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call

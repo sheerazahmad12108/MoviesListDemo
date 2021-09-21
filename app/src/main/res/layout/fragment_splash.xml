@@ -17,12 +17,11 @@
         android:orientation="vertical"
         tools:context=".ui.fragments.splashfragment.SplashFragment">
 
-        <TextView
+        <ImageView
             android:id="@+id/tvNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{(v)->viewModel.onButtonClick(v)}"
-            android:text="SplashScreen"
+            android:src="@drawable/themoviedb"
             android:textSize="@dimen/_20sdp" />
 
     </LinearLayout>

@@ -162,8 +162,6 @@ dependencies {
 //    Square ImagesView
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.13.3'
-    implementation 'com.github.norulab:android-exoplayer-fullscreen:1.2.1'
 }
 
 protobuf {
